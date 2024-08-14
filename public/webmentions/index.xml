@@ -13,7 +13,7 @@
       <link>http://localhost:1313/webmentions/test/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/webmentions/test/</guid>
-      <description>&lt;!DOCTYPE html&gt;&#xD;Document&#xD;in reply to:&#xD;@jschxll&#xD;First webmention received! Test sucessfull🎉</description>
+      <description>&lt;!doctype html&gt;&#xD;Hello World&#xD;in reply to: @jschxll&#xA;First webmention received! Test successful🎉</description>
     </item>
   </channel>
 </rss>
