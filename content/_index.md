@@ -9,6 +9,6 @@ I experimente with different technologies to build homeservers and create someti
 
 ## About
 So, why did I created this page? {{<line-break>}} 
--> Improving English writing skills (I'm from Germany, btw) {{<line-break>}}
+-> Improving my English writing skills (I'm from Germany, btw) {{<line-break>}}
 -> Talking about projects & ideas {{<line-break>}}
 -> Learning web-dev technologies along this page
