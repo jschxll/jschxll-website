@@ -7,8 +7,15 @@
     <generator>Hugo</generator>
     <language>en-US</language>
     <copyright>Copyright © 2024, Jan Schall.</copyright>
-    <lastBuildDate>Mon, 12 Aug 2024 10:34:13 +0200</lastBuildDate>
+    <lastBuildDate>Tue, 13 Aug 2024 19:22:07 +0200</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Terms of Privacy</title>
+      <link>http://localhost:1313/terms-of-privacy/</link>
+      <pubDate>Tue, 13 Aug 2024 19:22:07 +0200</pubDate>
+      <guid>http://localhost:1313/terms-of-privacy/</guid>
+      <description>Terms of Privacy The website is hosted in Germany and is therefore legally subject to the General Data Protection Regulation (Datenschutzgrundverordnung, DSGVO).&#xA;1. Introduction The operator of this website is committed to protecting your data. This privacy policy informs you about the nature, scope, and purpose of the collection and use of personal data on this website.&#xA;2. Responsible Party The responsible party in accordance with data protection laws is:</description>
+    </item>
     <item>
       <title>Smart Home plasma ball</title>
       <link>http://localhost:1313/smart-home-plasma-ball/</link>
