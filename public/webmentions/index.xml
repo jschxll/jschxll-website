@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Webmentions on Jan&#39;s site</title>
+    <link>http://localhost:1313/webmentions/</link>
+    <description>Recent content in Webmentions on Jan&#39;s site</description>
+    <generator>Hugo</generator>
+    <language>en-US</language>
+    <copyright>Copyright © 2024, Jan Schall.</copyright>
+    <atom:link href="http://localhost:1313/webmentions/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>http://localhost:1313/webmentions/webmentiontest/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/webmentions/webmentiontest/</guid>
+      <description>&lt;!DOCTYPE html&gt;&#xD;Document&#xD;in reply to: @jschxll&#xA;First webmention received! Test sucessfull🎉</description>
+    </item>
+  </channel>
+</rss>

@@ -51,5 +51,12 @@
       <guid>http://localhost:1313/run-yourself-a-cloud-at-home/</guid>
       <description>In recent weeks, I have been using my own cloud to back up my photos and videos from my smartphone and laptop by using a containerized Photoprism instance. Today, I want to share how I set up my server and Docker environment to get everything running.&#xA;Installing the Server&amp;rsquo;s Operating System First, you should use a separate computer so your own cloud is always accessible when you need to access your photos.</description>
     </item>
+    <item>
+      <title></title>
+      <link>http://localhost:1313/webmentions/test/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/webmentions/test/</guid>
+      <description>&lt;!DOCTYPE html&gt;&#xD;Document&#xD;in reply to:&#xD;@jschxll&#xD;First webmention received! Test sucessfull🎉</description>
+    </item>
   </channel>
 </rss>
