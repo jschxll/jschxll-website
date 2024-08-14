@@ -47,6 +47,8 @@
     <loc>http://localhost:1313/run-yourself-a-cloud-at-home/</loc>
     <lastmod>2024-04-28T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/webmentiontest/</loc>
+    <loc>http://localhost:1313/webmentions/test/</loc>
+  </url><url>
+    <loc>http://localhost:1313/webmentions/</loc>
   </url>
 </urlset>
