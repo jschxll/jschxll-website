@@ -4,7 +4,7 @@ date = 2024-08-11T20:52:53+02:00
 draft = false
 +++
 
-...and here you find important information in order to run this website.
+{{<creative-commons>}}
 
 ### Address
 

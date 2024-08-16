@@ -2,7 +2,10 @@
 {{ range .Site.Menus.main }}
 <a href="{{ .URL }}">{{ .Name }}</a>
 {{ end }}
-{{ with .Site.GetPage "/blog" }}
-<a href="{{ "blog" | relURL }}">Blog</a>
+{{ with .Site.GetPage "/articles" }}
+<a href="{{ "articles" | relURL }}">Articles</a>
+{{ end }}
+{{ with .Site.GetPage "/pictures" }}
+<a href="{{ "pictures" | relURL }}">Pictures</a>
 {{ end }}
 <a href="https://github.com/jschxll" rel="me">Git</a>
