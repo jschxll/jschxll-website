@@ -10,5 +10,3 @@ So, why did I create this page? {{<line-break>}}
 -> Talking about projects & ideas {{<line-break>}}
 -> Learning web-dev technologies along this page {{<line-break>}}
 -> Improving my English writing skills (I'm from Germany, btw)
-
-{{<webmentions>}}
