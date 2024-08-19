@@ -24,57 +24,49 @@ The responsible party in accordance with data protection laws is:
 
 This website does not collect personal data unless you voluntarily provide it (e.g., through contact forms). No cookies are used, and no data about user behavior is collected.
 
-## 4. Server Log Files
+## 4. Rights of Affected Persons
 
-When accessing the website, certain information is automatically stored in server log files. This data is anonymous and does not contain personal information. The log files may include:
+As an affected person, you have the right to access, the right to rectification or deletion, the right to restriction of processing, and the right to object to the processing of your data. If you have given consent, you can withdraw it at any time with future effect.
 
-- IP address of the accessing computer
-- Date and time of access
-- Name and URL of the retrieved file
+Please address your objection informally to the following address:
+
+See more under the section "Responsible party"
+
+Furthermore, you have the right to data portability. You also have the right to file a complaint with a supervisory authority regarding the processing. A list of relevant authorities can be found at: [BfDI - Addresses and Links (German)](https://www.bfdi.bund.de/DE/Infothek/Anschriften_Links/anschriften_links-node.html).
+
+## 5. Hosting
+
+His host collects the following data via so-called log files that your browser transmits:
+
+- IP address
+- Address of the previously visited website (referer request header)
+- Date and time of the request
+- Time zone difference from Greenwich Mean Time
+- Content of the request
+- HTTP status code
 - Amount of data transferred
-- Notification of successful retrieval
-- Browser type and version
-- Operating system
+- Website from which the request originates
+- Information about the browser and operating system
 
-## 5. Hosting Provider: IONOS
+This is necessary to display the website and to ensure its stability and security. This aligns with his legitimate interest under Article 6(1)(f) GDPR.
 
-This website is hosted by IONOS. When using IONOS services, the operator may transfer data to the provider, which can include personal data such as:
+There is no tracking involved, and he does not have direct access to this data.
 
-- Names
-- Email addresses
-- Phone numbers
+He uses the following host for providing the website:
 
-Additionally, IONOS may access log data such as:
+**GitHub Inc.**  
+88 Colin P Kelly Jr St  
+San Francisco, CA 94107  
+United States
 
-- Customer domains
-- Anonymized IPs
-- Request lines
-- Timestamps
-- Status codes
+GitHub is the recipient of your personal data. This aligns with his legitimate interest under Article 6(1)(f) GDPR, as he does not need to maintain a server on his premises. The server location is in the USA.
 
-The operator has entered into a Data Processing Agreement (DPA) with IONOS, as required by Article 28 of the GDPR. This agreement outlines the rights and obligations of both parties regarding the protection of sensitive data.
+For more information on how to object and remove data with GitHub, please refer to: [GitHub Privacy Statement](https://docs.github.com/en/free-pro-team@latest/github/site-policy/github-privacy-statement#github-pages)
 
-## 6. Data Processing Agreement
+You have the right to object to the processing. Whether the objection is successful will be determined through a balancing of interests.
 
-The operator ensures that the DPA specifies:
+Data will be deleted as soon as the purpose of processing no longer applies.
 
-- What data is shared with IONOS
-- How long IONOS retains the data
-- The purpose of data retention
-- The obligations of both parties to protect the data
+The processing of the data specified in this section is neither legally nor contractually required. The functionality of the website is not guaranteed without processing.
 
-## 7. User Rights
-
-Users have the right to request information about the personal data stored about them. They also have the right to rectification, deletion, or restriction of processing of their data.
-
-## 8. Changes to This Privacy Policy
-
-The operator reserves the right to change this privacy policy at any time. The current version will be available on the website.
-
-## 9. Contact
-
-For questions regarding this privacy policy or the processing of your data, please contact: **contact@jschall.net**
-
-## 10. References to IONOS Privacy Policy
-
-For more information on how IONOS handles data, users are encouraged to review IONOS's privacy policy and terms of service. [Check it here out](https://www.ionos.de/terms-gtc/datenschutzerklaerung/)
+GitHub has implemented compliance measures for international data transfers. These measures apply to all global activities where GitHub processes personal data of individuals in the EU. These measures are based on the EU Standard Contractual Clauses (SCCs). For more information, please refer to: [GitHub Data Protection Addendum](https://docs.github.com/en/free-pro-team@latest/github/site-policy/github-data-protection-addendum#attachment-1–the-standard-contractual-clauses-processors)
