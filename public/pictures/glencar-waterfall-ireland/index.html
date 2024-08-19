@@ -232,33 +232,73 @@
 
 <a href="https://github.com/jschxll" rel="me">Git</a></nav>
 </header>
-  <main>
-<article class="picture-container"></article>
-<img src="/pictures-site/glencar-waterfall-ireland.jpg" alt="Glencar Waterfall Ireland" />
-<div class="location-container">
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    height="24px"
-    viewBox="0 -960 960 960"
-    width="24px"
-    fill="#e8eaed"
+  <main> 
+ 
+ 
+
+
+
+
+<head>
+  <link rel="stylesheet" href="http://localhost:1313/photoswipe/dist/photoswipe.css" />
+</head>
+
+<article class="picture-container">
+  
+  
+  
+  
+  
+  <div
+    class="pswp-gallery pswp-gallery--single-column"
+    id="gallery--getting-started"
   >
-    <path
-      d="M480-480q33 0 56.5-23.5T560-560q0-33-23.5-56.5T480-640q-33 0-56.5 23.5T400-560q0 33 23.5 56.5T480-480Zm0 294q122-112 181-203.5T720-552q0-109-69.5-178.5T480-800q-101 0-170.5 69.5T240-552q0 71 59 162.5T480-186Zm0 106Q319-217 239.5-334.5T160-552q0-150 96.5-239T480-880q127 0 223.5 89T800-552q0 100-79.5 217.5T480-80Zm0-480Z"
-    />
-  </svg>
-  <div class="picture-info">
-    <span>Glencar Waterfall County Sligo, Ireland</span>
-    <time
-      class="picture-date"
-      datetime='2024-08-01'
-      pubdate
+    <a
+      href="/pictures-site/glencar-waterfall-ireland.jpg"
+      data-pswp-src="/pictures-site/glencar-waterfall-ireland.jpg"
+      data-pswp-width="3072"
+      data-pswp-height="3072"
+      target="_blank"
     >
-      01 Aug, 2024
-    </time>
+      <img src="/pictures-site/glencar-waterfall-ireland.jpg" alt="Glencar Waterfall Ireland" />
+    </a>
   </div>
-</div>
-<p></p>
+  
+  <div class="location-container">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      height="24px"
+      viewBox="0 -960 960 960"
+      width="24px"
+      fill="#e8eaed"
+    >
+      <path
+        d="M480-480q33 0 56.5-23.5T560-560q0-33-23.5-56.5T480-640q-33 0-56.5 23.5T400-560q0 33 23.5 56.5T480-480Zm0 294q122-112 181-203.5T720-552q0-109-69.5-178.5T480-800q-101 0-170.5 69.5T240-552q0 71 59 162.5T480-186Zm0 106Q319-217 239.5-334.5T160-552q0-150 96.5-239T480-880q127 0 223.5 89T800-552q0 100-79.5 217.5T480-80Zm0-480Z"
+      />
+    </svg>
+    <div class="picture-info">
+      <span>Glencar Waterfall County Sligo, Ireland</span>
+      <time
+        class="picture-date"
+        datetime='2024-08-01'
+        pubdate
+      >
+        01 Aug, 2024
+      </time>
+    </div>
+  </div>
+  <p></p>
+</article>
+
+<script type="module">
+  import PhotoSwipeLightBox from "http:\/\/localhost:1313\/photoswipe\/dist\/photoswipe-lightbox.esm.js";
+  const lightbox = new PhotoSwipeLightBox({
+    gallery: "#gallery--getting-started",
+    children: "a",
+    pswpModule: () => import("http:\/\/localhost:1313\/photoswipe\/dist\/photoswipe.esm.js"),
+  });
+  lightbox.init();
+</script>
 
 <style>
   .picture-container {
