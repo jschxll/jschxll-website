@@ -1,7 +1,7 @@
 {{ define "main" }}
 
 {{ $dir := "pictures-site" }} 
-{{ $images := (readDir (printf "static/%s" $dir)) }}
+{{ $images := (readDir (printf "assets/%s" $dir)) }}
 
 <div class="grid-container">
   {{ range $images }}

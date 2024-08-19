@@ -1,5 +1,5 @@
 {{ $dir := .Get "dir"}} 
-{{ $images := (readDir (printf "static/%s" $dir)) }}
+{{ $images := (readDir resources.Get $dir) }}
 
 <div class="grid-container">
   {{ range $images }}
