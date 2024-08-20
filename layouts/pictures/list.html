@@ -1,33 +1,13 @@
 {{ define "main" }}
 
-{{ $dir := "pictures-site" }}
-{{ $pictures := (readDir (printf "assets/%s" $dir)) }}
-{{ $sortedPictures := slice }}
-
-{{ range $pictures }}
-  {{ $baseName := strings.TrimSuffix (path.Ext .Name) .Name }}
-
-  <!-- Check if it's an image -->
-  {{ if (or (eq (lower (path.Ext .Name)) ".jpg") (eq (lower (path.Ext .Name)) ".jpeg") (eq (lower (path.Ext .Name)) ".png") (eq (lower (path.Ext .Name)) ".gif")) }}
-
-    <!-- Find the corresponding Markdown file -->
-    {{ $page := site.GetPage (printf "pictures/%s.md" $baseName) }}
-    
-    <!-- If the Markdown file exists and contains a date -->
-    {{ if $page }}
-      {{ $date := $page.Params.date }}
-      {{ $sortedPictures = $sortedPictures | append (dict "Name" .Name "Date" $date) }}
-    {{ end }}
-    
-  {{ end }}
-{{ end }}
-
-<!-- Sort the images by date in descending order -->
-{{ $sortedPictures = sort $sortedPictures "Date" "desc" }}
+{{ $dir := "pictures-site" }} 
+{{ $images := (readDir (printf "assets/%s" $dir)) }}
 
 <div class="grid-container">
-  {{ range $sortedPictures }}
+  {{ range $images }}
   {{ $baseName := strings.TrimSuffix (path.Ext .Name) .Name }}
+  <!-- Check if it's an image -->
+  {{ if (or (eq (lower (path.Ext .Name)) ".jpg") (eq (lower (path.Ext .Name)) ".jpeg") (eq (lower (path.Ext .Name)) ".png") (eq (lower (path.Ext .Name)) ".gif")) }}
   <div class="grid-picture">
     <a class="picture-link" href="{{ printf "/pictures/%s" $baseName }}">
       <img
@@ -38,6 +18,7 @@
       />
     </a>
   </div>
+  {{ end }} 
   {{ end }}
 </div>
 
