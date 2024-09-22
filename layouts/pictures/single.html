@@ -1,35 +1,37 @@
-{{ define "main" }} 
-{{ $lightboxScript := resources.Get "photoswipe/dist/photoswipe-lightbox.esm.js" }} 
-{{ $pswpModule := resources.Get "photoswipe/dist/photoswipe.esm.js" }} 
+{{ define "main" }}
+
+{{ $lightboxScript := resources.Get "photoswipe/dist/photoswipe-lightbox.esm.js" }}
+{{ $pswpModule := resources.Get "photoswipe/dist/photoswipe.esm.js" }}
 {{ $lightboxStyle := resources.Get "photoswipe/dist/photoswipe.css" }}
 {{ $picturePath := .Params.picture }}
-{{ $picture := resources.Get $picturePath }}
+{{ $picture := printf "/pictures-site/%s" $picturePath }}
+{{ $imageConfig := imageConfig (printf "static/pictures-site/%s" $picturePath) }}
+{{ $pictureWidth := $imageConfig.Width }}
+{{ $pictureHeight := $imageConfig.Height }}
 
 <head>
   <link rel="stylesheet" href="{{ $lightboxStyle.Permalink }}" />
 </head>
 
 <article class="picture-container">
-  <!-- Get picture dimensions for photoswipe -->
+  <!-- Display the picture using the static folder -->
   {{ if $picture }}
-  {{ $pictureWidth := $picture.Width }}
-  {{ $pictureHeight := $picture.Height }}
-  <!--<p>Image dimensions: {{ $pictureWidth }} x {{ $pictureHeight }}</p>-->
   <div
     class="pswp-gallery pswp-gallery--single-column"
     id="gallery--getting-started"
   >
     <a
-      href="{{ .Params.picture }}"
-      data-pswp-src="{{ $picturePath }}"
+      href="{{ $picture }}"
+      data-pswp-src="{{ $picture }}"
       data-pswp-width="{{ $pictureWidth }}"
       data-pswp-height="{{ $pictureHeight }}"
       target="_blank"
     >
-      <img src="{{ .Params.picture }}" alt="{{ .Title }}" />
+      <img src="{{ $picture }}" alt="{{ .Title }}" />
     </a>
   </div>
   {{ end }}
+  
   <div class="location-container">
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -53,6 +55,7 @@
       </time>
     </div>
   </div>
+  
   <p>{{ .Content }}</p>
 </article>
 
@@ -85,4 +88,5 @@
     flex-direction: column;
   }
 </style>
+
 {{ end }}

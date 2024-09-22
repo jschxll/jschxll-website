@@ -1,24 +1,25 @@
 {{ define "main" }}
 
-{{ $dir := "pictures-site" }} 
-{{ $images := (readDir (printf "assets/%s" $dir)) }}
+{{ $dir := "pictures-site" }}
+{{ $staticDir := printf "/%s" $dir }} 
 
 <div class="grid-container">
-  {{ range $images }}
-  {{ $baseName := strings.TrimSuffix (path.Ext .Name) .Name }}
-  <!-- Check if it's an image -->
-  {{ if (or (eq (lower (path.Ext .Name)) ".jpg") (eq (lower (path.Ext .Name)) ".jpeg") (eq (lower (path.Ext .Name)) ".png") (eq (lower (path.Ext .Name)) ".gif")) }}
-  <div class="grid-picture">
-    <a class="picture-link" href="{{ printf "/pictures/%s" $baseName }}">
-      <img
-        src="{{ $dir | relURL }}/{{ .Name }}"
-        alt="{{ .Name }}"
-        width="auto"
-        height="auto"
-      />
-    </a>
-  </div>
-  {{ end }} 
+  {{ range (readDir (printf "static/%s" $dir)) }}
+    {{ $baseName := strings.TrimSuffix (path.Ext .Name) .Name }}
+    <!-- Check if it's an image -->
+    {{ if (or (eq (lower (path.Ext .Name)) ".jpg") (eq (lower (path.Ext .Name)) ".jpeg") (eq (lower (path.Ext .Name)) ".png") (eq (lower (path.Ext .Name)) ".gif")) }}
+      <div class="grid-picture">
+        <!-- Link to the single.html page for this image -->
+        <a class="picture-link" href="{{ printf "/pictures/%s" $baseName }}">
+          <img
+            src="{{ $staticDir }}/{{ .Name }}"
+            alt="{{ .Name }}"
+            width="auto"
+            height="auto"
+          />
+        </a>
+      </div>
+    {{ end }}
   {{ end }}
 </div>
 
@@ -33,4 +34,5 @@
     opacity: 0.5;
   }
 </style>
+
 {{ end }}
