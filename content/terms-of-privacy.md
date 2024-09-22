@@ -18,7 +18,7 @@ The responsible party in accordance with data protection laws is:
 
 **Jens Schall**  
 **Ricarda-Huch-Straße 29, Düren 52353, Germany**  
-**contact@jschall.net**
+**jschxll@proton.me**
 
 ## 3. Data Collection and Processing
 

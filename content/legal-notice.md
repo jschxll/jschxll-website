@@ -14,4 +14,4 @@ Ricarda-Huch-Straße 29 {{<line-break>}}
 Germany
 
 ### Say hello (。・∀・)ノ
-contact@jschall.net
+jschxll@proton.me
