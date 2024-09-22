@@ -6,8 +6,6 @@ draft = false
 
 # Terms of Privacy
 
-The website is hosted in Germany and is therefore legally subject to the General Data Protection Regulation (Datenschutzgrundverordnung, DSGVO).
-
 ## 1. Introduction
 
 The operator of this website is committed to protecting your data. This privacy policy informs you about the nature, scope, and purpose of the collection and use of personal data on this website.
