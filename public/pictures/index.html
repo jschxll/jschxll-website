@@ -296,7 +296,14 @@
   .grid-container {
     margin-top: 10px;
     display: grid;
-    grid-template-columns: auto auto auto;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0px;
+  }
+
+  .grid-container img {
+    width: 100%;
+    height: auto;
+    display: block;
   }
 
   .picture-link:hover {
