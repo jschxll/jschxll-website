@@ -1,11 +1,11 @@
-<a href="{{ "" | relURL }}">Home</a>
+<a href="{{ "" | relURL }}">[Home]</a>
 {{ range .Site.Menus.main }}
 <a href="{{ .URL }}">{{ .Name }}</a>
 {{ end }}
 {{ with .Site.GetPage "/blog" }}
-<a href="{{ "blog" | relURL }}">Blog</a>
+<a href="{{ "blog" | relURL }}">[Blog]</a>
 {{ end }}
 {{ with .Site.GetPage "/pictures" }}
-<a href="{{ "pictures" | relURL }}">Pictures</a>
+<a href="{{ "pictures" | relURL }}">[Pictures]</a>
 {{ end }}
-<a href="https://github.com/jschxll" rel="me">Git</a>
+<a href="https://github.com/jschxll" rel="me">[Git]</a>

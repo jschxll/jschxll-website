@@ -2,7 +2,7 @@
 title = "Home"
 +++
 
-# Hey, everyone!
+## whoami
 
 I'm Jan, a student from Germany and this is my personal page. I'll share pictures, projects and other stuff that comes me in mind.{{<line-break>}}
 Recently, experimente with servers and machine learning algorithms (it ends mostly in headache) and create useless gadgets (see: [smart home plasma ball]({{< ref "smarthome-plasmaball-automation.md">}})), but I'm also interested in science, especially in astronomy.{{<line-break>}} That's why, I mostly read Sci-Fi romans:-D

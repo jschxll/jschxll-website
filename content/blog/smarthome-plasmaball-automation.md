@@ -1,11 +1,7 @@
 +++
 title = "Smart Home plasma ball"
 date = "2024-08-12T10:34:13+02:00"
-
-#
-# description is optional
-#
-# description = "An optional description for SEO. If not provided, an automatically created summary will be used."
+description = "I recently decided to integrate my plasma ball into my smart home system. Why? Honestly, I just thought it would be a fun experiment, though it turned out to be a lot more challenging than expected, especially since I lack much experience with soldering and electrical engineering. Perfect conditions for such a project, right?"
 
 tags = ["raspi5","docker","homeserver","linux"]
 +++
