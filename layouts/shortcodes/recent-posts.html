@@ -1,0 +1,12 @@
+<h2>Recent Posts</h2>
+<ul>
+  {{ range first 2 (where .Site.RegularPages "Section" "blog") }}
+  <li>
+    <span
+      >{{ .Date.Format (default "02 Jan, 2006" .Site.Params.dateFormat) }}</span
+    >
+    <br />
+    <a href="{{ .Permalink }}">{{ .Title }}</a>
+  </li>
+  {{ end }}
+</ul>
