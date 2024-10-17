@@ -1,0 +1,21 @@
+
+{{ if ne .Site.Params.hideMadeWithLine true }} <span>Made with</span> <a class="footer-link" href="https://github.com/janraasch/hugo-bearblog/">Hugo ʕ•ᴥ•ʔ Bear</a>{{ end }}
+|
+<a class="footer-link" href="{{ "index.xml" | relURL }}">RSS</a>
+|
+<a class="footer-link" href="{{ "legal-notice" | relURL }}">legal notice</a>
+|
+<a class="footer-link" href="{{ "terms-of-privacy" | relURL }}">terms of privacy</a>
+<br>
+<a class="footer-link" href="https://xn--sr8hvo.ws/previous">←</a>
+<span>An</span> <a class="footer-link" href="https://xn--sr8hvo.ws">IndieWeb Webring</a> 🕸💍
+<a class="footer-link" href="https://xn--sr8hvo.ws/next">→</a>
+<style>
+    .footer-link {
+        font-size: small;
+    }
+
+    span {
+        font-size: small;
+    }
+</style>

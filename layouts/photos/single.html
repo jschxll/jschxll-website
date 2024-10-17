@@ -1,0 +1,92 @@
+{{ define "main" }}
+
+{{ $lightboxScript := resources.Get "photoswipe/dist/photoswipe-lightbox.esm.js" }}
+{{ $pswpModule := resources.Get "photoswipe/dist/photoswipe.esm.js" }}
+{{ $lightboxStyle := resources.Get "photoswipe/dist/photoswipe.css" }}
+{{ $picturePath := .Params.photo }}
+{{ $picture := resources.GetMatch (printf "photos/%s" $picturePath) }}
+
+{{ $pictureWidth := $picture.Width }}
+{{ $pictureHeight := $picture.Height }}
+
+<head>
+  <link rel="stylesheet" href="{{ $lightboxStyle.Permalink }}" />
+</head>
+
+<article class="picture-container h-card">
+  {{ if $picture }}
+  <div
+    class="pswp-gallery pswp-gallery--single-column"
+    id="gallery--getting-started"
+  >
+    <a
+      href="{{ $picture }}"
+      data-pswp-src="{{ $picture }}"
+      data-pswp-width="{{ $pictureWidth }}"
+      data-pswp-height="{{ $pictureHeight }}"
+      target="_blank"
+    >
+      <img src="{{ $picture.RelPermalink }}" alt="{{ .Title }}" />
+    </a>
+  </div>
+  {{ end }}
+  
+  <div class="location-container">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      height="24px"
+      viewBox="0 -960 960 960"
+      width="24px"
+      fill="#e8eaed"
+    >
+      <path
+        d="M480-480q33 0 56.5-23.5T560-560q0-33-23.5-56.5T480-640q-33 0-56.5 23.5T400-560q0 33 23.5 56.5T480-480Zm0 294q122-112 181-203.5T720-552q0-109-69.5-178.5T480-800q-101 0-170.5 69.5T240-552q0 71 59 162.5T480-186Zm0 106Q319-217 239.5-334.5T160-552q0-150 96.5-239T480-880q127 0 223.5 89T800-552q0 100-79.5 217.5T480-80Zm0-480Z"
+      />
+    </svg>
+    <div class="picture-info">
+      <span>{{ .Params.place }}</span>
+      <time
+        class="picture-date"
+        datetime='{{ .Date.Format "2006-01-02" }}'
+        pubdate
+      >
+        {{ .Date.Format (default "02 Jan, 2006" .Site.Params.dateFormat) }}
+      </time>
+    </div>
+  </div>
+  
+  <p>{{ .Content }}</p>
+  <p>You have written a <strong>response</strong>? Post it <a href="https://webmention.io/jschall.net/webmention">here</a>!</p>
+</article>
+
+<script type="module">
+  import PhotoSwipeLightBox from "{{ $lightboxScript.Permalink }}";
+  const lightbox = new PhotoSwipeLightBox({
+    gallery: "#gallery--getting-started",
+    children: "a",
+    pswpModule: () => import("{{ $pswpModule.Permalink }}"),
+  });
+  lightbox.init();
+</script>
+
+<style>
+  .picture-container {
+    margin-top: 10px;
+  }
+
+  .location-container {
+    display: flex;
+    align-items: center;
+  }
+
+  .picture-date {
+    font-size: small;
+  }
+
+  .picture-info {
+    display: flex;
+    flex-direction: column;
+  }
+</style>
+
+{{ end }}

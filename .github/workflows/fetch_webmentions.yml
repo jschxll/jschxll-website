@@ -1,0 +1,41 @@
+name: Fetch Webmentions
+run-name: Fetching Webmentions from Webmentions.io
+on:
+  schedule:
+    - cron: "0 */6 * * *" #scripts runs every 6 hours
+
+permissions:
+  contents: write
+
+jobs:
+  fetch-webmentions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: |
+          python -m venv venv
+          source venv/bin/activate
+          python -m pip install --upgrade pip
+          python -m pip install requests
+      - name: Run Python script
+        run: |
+          source venv/bin/activate
+          python fetch_webmentions.py ${{ secrets.WEBMENTIONS_TOKEN }}
+      - name: Commit to repository
+        env:
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          COMMIT_MSG: |
+            Fetch webmentions
+        run: |
+          git config user.email "schall.jan01@gmail.com"
+          git config user.name "j-schall"
+          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/jschxll/jschxll-website.git
+          git checkout main
+          git add .
+          git diff --quiet && git diff --staged --quiet || (git commit -m "${COMMIT_MSG}"; git push -u origin main)

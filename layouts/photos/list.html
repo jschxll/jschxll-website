@@ -1,0 +1,51 @@
+{{ define "main" }}
+
+<div class="picture-grid">
+  {{ $pages := where site.RegularPages "Type" "photos" }}
+  {{ $paginator := .Paginate ($pages.ByParam "date").Reverse 4 }}
+  {{ range $paginator.Pages }}
+    {{ $picturePath := .Params.photo }}
+    {{ $originalPicture := resources.GetMatch (printf "photos/%s" $picturePath) }}
+
+    {{ if $originalPicture }}
+      {{ $thumbnail := $originalPicture.Fit "500x500" }} <!-- Adjust size as needed -->
+      <div class="picture-item">
+        <a href="{{ .Permalink }}">
+          <img src="{{ $thumbnail.RelPermalink }}" alt="{{ .Title }}" loading="lazy" />
+        </a>
+      </div>
+    {{ end }}
+  {{ end }}
+</div>
+
+{{ template "_internal/pagination.html" . }}
+
+<style>
+  .picture-grid {
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 1fr;
+  }
+
+  .picture-item {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    background-color: #f0f0f0;
+  }
+
+  .picture-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .picture-item:hover {
+    filter: brightness(0.7);
+    transition: filter 0.3s;
+  }
+</style>
+
+{{ end }}

@@ -1,0 +1,23 @@
+{{ $picturePath := .Params.photo }}
+{{ $originalPicture := resources.GetMatch (printf "photos/%s" $picturePath) }}
+
+{{ if $originalPicture }}
+    {{ $thumbnailSmall := $originalPicture.Fit "200x200" }}
+    {{ $thumbnailMedium := $originalPicture.Fit "400x400" }}
+    {{ $thumbnailLarge := $originalPicture.Fit "800x800" }}
+      
+<div class="picture-item">
+    <a href="{{ .Permalink }}">
+        <img 
+        src="{{ $thumbnailMedium.RelPermalink }}" 
+        alt="{{ .Title }}"
+        loading="lazy"
+            rcset="{{ $thumbnailSmall.RelPermalink }} 200w,
+                    {{ $thumbnailMedium.RelPermalink }} 400w,
+                    {{ $thumbnailLarge.RelPermalink }} 800w"
+            sizes="(max-width: 600px) 200px,
+                   (max-width: 1200px) 400px,
+                   800px" />
+    </a>
+</div>
+{{ end }}

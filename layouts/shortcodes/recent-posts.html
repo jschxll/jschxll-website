@@ -1,0 +1,64 @@
+<h3>Recent Posts</h3>
+<div class="recent-posts-container">
+  {{ range first 2 (where .Site.RegularPages "Section" "posts") }}
+  <div class="post-card">
+    <div class="post-header">
+      <span class="post-date">
+        {{ .Date.Format (default "02 Jan, 2006" .Site.Params.dateFormat) }}
+      </span>
+      <a href="{{ .Permalink }}" class="post-title">{{ .Title }}</a>
+    </div>
+    <p class="post-description">
+      {{ .Params.description | default (.Summary | plainify) }}
+    </p>
+    <a href="{{ .Permalink }}" class="read-more">Read more</a>
+  </div>
+  {{ end }}
+</div>
+
+<style>
+  .recent-posts-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .post-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .post-card {
+    padding-bottom: 4px;
+    border-bottom-style: dotted;
+  }
+  .post-title {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #ddd;
+    text-decoration: none;
+  }
+  .post-title:hover {
+    color: #00aaff;
+  }
+  .post-description {
+    margin: 10px 0;
+    line-height: 1.6;
+  }
+  .read-more {
+    font-size: 0.9em;
+    color: #007acc;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  .read-more:hover {
+    text-decoration: underline;
+  }
+
+  @media screen and (max-width: 510px) {
+    .post-header {
+      display: flex;
+      justify-content: initial;
+      flex-direction: column;
+    }
+  }
+</style>

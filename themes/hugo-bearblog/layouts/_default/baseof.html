@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="{{ with .Site.LanguageCode }}{{ . }}{{ else }}en-US{{ end }}">
+
+<head>
+  <meta http-equiv="X-Clacks-Overhead" content="GNU Terry Pratchett" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  {{- partial "favicon.html" . -}}
+  <title>{{- block "title" . }}{{ with .Title }}{{ . }} | {{ end }}{{ .Site.Title }}{{- end }}</title>
+
+  {{- partial "seo_tags.html" . -}}
+  <meta name="referrer" content="no-referrer-when-downgrade" />
+
+  {{ with .OutputFormats.Get "rss" -}}
+  {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
+  {{ end -}}
+
+  {{- partial "style.html" . -}}
+  {{- partial "custom_head.html" . -}}
+</head>
+
+<body>
+  <header>
+    {{- partial "header.html" . -}}
+  </header>
+  <main>
+    {{- block "main" . }}{{- end }}
+    <!-- Read webmentions from data/webmentions.json -->
+    {{ $filePath := "data/webmentions.json" }}
+    {{ if fileExists $filePath }}
+      {{ $content := readFile $filePath }}
+      {{ if eq $content "" }}
+        {{ return }}
+      {{ else }}
+        {{ $webmentions := $content | transform.Unmarshal }}
+        {{ $pageURL := .Permalink }}
+        {{ $pageMentions := where $webmentions.children "wm-target" $pageURL }}
+        {{ if gt (len $pageMentions) 0 }}
+        <section id="webmentions">
+          <h2>Webmentions</h2>
+          <ul>
+            {{ range $pageMentions }}
+              <li>
+                {{ $author := .author.name | default "anonymous" }}
+                {{ $content := .content.text | default "No content" }}
+                {{ $type := index . "wm-property" }}
+
+                {{ if eq $type "in-reply-to" }}
+                  <strong>@{{ $author }}</strong> replied: <blockquote>{{ $content }}</blockquote>
+                {{ else if eq $type "like-of" }}
+                  <strong>@{{ $author }}</strong> ❤️ this page.
+                {{ else if eq $type "repost-of" }}
+                  <strong>@{{ $author }}</strong> reposted this page.
+                {{ else }}
+                  <strong>@{{ $author }}</strong> mentioned this page.
+                {{ end }}
+              </li>
+            {{ end }}
+          </ul>
+        </section>
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  </main>
+  <footer>
+    {{- partial "footer.html" . -}}
+  </footer>
+  {{- partial "custom_body.html" . -}}
+</body>
+
+</html>

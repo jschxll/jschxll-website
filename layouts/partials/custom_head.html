@@ -1,0 +1,10 @@
+{{ with .OutputFormats.Get "rss" -}} {{ printf `<link
+  rel="%q"
+  type="%q"
+  href="%q"
+  title="%q"
+/>` .Rel .MediaType.Type .Permalink site.Title | safeHTML }} {{ end }}
+<link rel="webmention" href="https://webmention.io/jschall.net/webmention" />
+<link rel="pingback" href="https://webmention.io/jschall.net/xmlrpc" />
+<link rel="authorization_endpoint" href="https://indieauth.com/auth" />
+<link rel="token_endpoint" href="https://tokens.indieauth.com/token" />
