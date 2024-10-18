@@ -9,29 +9,60 @@ In recent weeks, I have been using my own cloud to back up my photos and videos 
 
 ## Installing the Server's Operating System
 
-First, you should use a separate computer so your own cloud is always accessible when you need to access your photos. I had an old laptop lying around that I used, but you can also use a cloud server. To make management easier, Ubuntu Server is a good choice. That's why I used it to run my photo cloud. Download Ubuntu Server on this <a style="color: #03DAC6;" target="_blank" href="https://ubuntu.com/download/server">site</a> by clicking the download button.
+First, you should use a separate computer so your own cloud is always accessible when you need to access your photos. I had an old laptop lying around that I used, but you can also use a cloud server. To make management easier, Ubuntu Server is a good choice. That's why I used it to run my photo cloud. Download Ubuntu Server on [this site](https://ubuntu.com/download/server) by clicking the download button.
 
-Next, after the ISO file is downloaded, you need to flash the file onto a USB stick. To do this, download the <a style="color: #03DAC6;" target="_blank" href="https://etcher.balena.io/">BalenaEtcher</a> tool. Once BalenaEtcher is successfully installed on your system, it's time to flash the ISO file onto the USB stick. Open BalenaEtcher, select "Flash from File," and find your downloaded ISO. Then select your USB stick and press "Flash!". This process can take some time, so be patient. After the flashing process, you will receive a message indicating that you can remove your USB stick.<br>
-Now it's time to install Ubuntu on your server. Insert the boot device (the USB stick) into your computer that will be used as a server and press ESC during boot. In the displayed menu, you should see the name of the USB stick, which you now select by pressing ENTER. If the first boot doesn't work, please check in the BIOS if Secure Boot is disabled and try again. <br>
+Next, after the ISO file is downloaded, you need to flash the file onto a USB stick. To do this, download the BalenaEtcher tool. Once BalenaEtcher is successfully installed on your system, it's time to flash the ISO file onto the USB stick. Open BalenaEtcher, select "Flash from File," and find your downloaded ISO. Then select your USB stick and press "Flash!". This process can take some time, so be patient. After the flashing process, you will receive a message indicating that you can remove your USB stick.{{<line-break>}}
+Now it's time to install Ubuntu on your server. Insert the boot device (the USB stick) into your computer that will be used as a server and press ESC during boot. In the displayed menu, you should see the name of the USB stick, that you want to select by pressing ENTER. If the first boot doesn't work, please check in the BIOS if Secure Boot is disabled and try again. {{<line-break>}}
 Now follow the instructions in the Ubuntu Server installation menu. Make sure to enable the OpenSSH client during the installation so we can interact with our server later.
 
 ## Post Installation
 
-After installing Ubuntu on your server, it's time to install the services we need to create a private cloud. But first, we need to access our server. We can use SSH for this. So open the terminal on your device (not the server) and enter:<br>
-`ssh YOUR_USER_NAME@SERVER_IP_ADRESS`<br>
-Now you have full access to the server. First, update the repositories with: `sudo apt-get update && sudo apt-get upgrade -y` to have the latest mirrors.
+After installing Ubuntu on your server, it's time to install the services we need to create a private cloud. But first, we need to access our server. We can use SSH for this. So open the terminal on your device (not the server) and enter:{{<line-break>}}
+```bash
+ssh YOUR_USER_NAME@SERVER_IP_ADRESS
+```
+{{<line-break>}}
+Now you have full access to your server. At first, make sure your package manager is up to date. Run therefore 
+```bash
+sudo apt-get update && sudo apt-get upgrade -y
+```
+to update your mirror's repositories.
 
 ## Installing Docker and Photoprism
 
-You can easily install Docker with this command:<br> `sudo apt-get install docker.io`.<br> Then we want to install the Docker Compose plugin so we can deploy the Photoprism instance with a simple YAML file. To do this, enter:<br> `sudo apt-get install docker-compose-plugin`<br> and install the package. You can check if the installation was successful by displaying the Docker Compose version with the following command:<br> `docker compose version`.<br>
-After installing Docker Compose, we can finally install Photoprism itself. For this, I have prepared a docker-compose.yml file that you can simply clone:<br>`git clone https://github.com/j-schall/photoprism-docker-compose.git`<br><br>
-Modify the file to customize it and set strong passwords. Pay special attention when setting up your PHOTOPRISM_USER_PASSWORD. It must be the same as the MARIADB_USER_PASSWORD as well as the username.
+You can easily install Docker with this commands taken from the [official docker installation guide](https://docs.docker.com/engine/install/ubuntu/):
+```bash
+# Add Docker's official GPG key:
+sudo apt-get update
+sudo apt-get install ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+# Add the repository to Apt sources:
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update
+```
+Now we added docker in our apt mirror list and should install docker packages via:
+```bash
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+```
+For convenience, we will use the docker-compose-plugin to deploy the Photoprism instance with a simple YAML file. You can check if the installation was successful by displaying the Docker Compose version with `docker compose version`.{{<line-break>}}
+After installing Docker Compose, we can finally install the Photoprism image. I have already prepared a docker compose file which you can use if you like.{{<line-break>}}
+```bash
+git clone https://github.com/j-schall/photoprism-docker-compose.git
+```
+Feel free to costumize the file for your needs, but I would strongly recommend setting stronger passwords. Therefore, pay special attention when setting up your *PHOTOPRISM_USER_PASSWORD*. It needs to be the same as *MARIADB_USER_PASSWORD* and the username too.
 <br><br>
-Now go to the directory where you saved the cloned docker-compose.yml file and run it with: `sudo docker compose up -d` . Check whether the container is running with: `sudo docker ps `. There you will also find the port on which the Photoprism web interface is running.
+Now direct to the folder where you saved the cloned docker-compose.yml file and execute it (`sudo docker compose up -d`). Check the container status with: `sudo docker ps `. If all went successfully you should find your running container there.
 
 ## Setting Up Syncthing
 
-If you have already opened the docker-compose file, you might have seen that Syncthing listens on port 8384. Open the Syncthing web interface by entering YOUR_SERVER_IP_ADDRESS:8384. There you can set a strong password.<br><br>
+If you have already opened the docker-compose file, you might have seen that Syncthing listens on port 8384. Open the Syncthing web interface, where you firstly have to set a strong password.
+{{<line-break>}}
 The next step varies. If you want to sync your photos and videos from your smartphone, download the Syncthing app from the Play Store. Unfortunately, there is no official Syncthing app for iOS yet. When you open the app, do the following:
 
 1. Go to the device menu and press the + button.
@@ -54,7 +85,7 @@ Congratulations 🎉 You have just built your own cloud!
 
 ### Use LAN Instead of WLAN
 
-I would recommend using LAN instead of Wi-Fi. It is more stable and faster for uploading and downloading files. Additionally, it is less complex during the Ubuntu Server installation process as it is recognized directly by Ubuntu.<br>
+I would strongly recommend using LAN instead of Wi-Fi. It is more stable and faster for uploading and downloading files. Additionally, it is less complex during the Ubuntu Server installation process as it is recognized directly by Ubuntu.<br>
 
 ### Keep the Laptop Running When Closing the Lid
 

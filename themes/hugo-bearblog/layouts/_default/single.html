@@ -17,5 +17,29 @@
   <a href="{{ .Permalink }}">#{{ .LinkTitle }}</a>
   {{ end }}
 </p>
-<p>You have written a <strong>response</strong>? Post it <a href="https://webmention.io/jschall.net/webmention">here</a>!</p>
+
+<section class="post-end">
+  <p>You have written a <strong>response</strong>? Post it <a href="https://webmention.io/jschall.net/webmention">here</a>!</p>
+
+  {{ with .PrevInSection }}
+    <a class="prev" href="{{ .Permalink }}">{{ .Title }}&raquo</a>
+  {{ end }}
+  {{ with .NextInSection }}
+    <a class="next" href="{{ .Permalink }}">&laquo{{ .Title }}</a>
+  {{ end }}
+</section>
+
+<style>
+  .prev {
+    float: right;
+  }
+  .next {
+    float: left;
+  }
+  .post-end {
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+</style>
+
 {{ end }}

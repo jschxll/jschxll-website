@@ -35,7 +35,7 @@ In the end, it looks like this:
 
 docker-compose.yml:
 
-```
+```yml
 services:
   mosquitto:
     image: eclipse-mosquitto
@@ -67,7 +67,7 @@ volumes:
 
 mosquitto.conf:
 
-```
+```bash
 allow_anonymous true
 listener 1883
 persistence true
