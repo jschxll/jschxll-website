@@ -8,7 +8,17 @@
     {{ $originalPicture := resources.GetMatch (printf "photos/%s" $picturePath) }}
 
     {{ if $originalPicture }}
-      {{ $thumbnail := $originalPicture.Fit "500x500" }} <!-- Adjust size as needed -->
+      {{ $thumbnail := $originalPicture.Fit "500x500" }}
+      <div class="picture-item">
+        <a href="{{ .Permalink }}">
+          <img src="{{ $thumbnail.RelPermalink }}" alt="{{ .Title }}" loading="lazy" />
+        </a>
+      </div>
+    {{ else }}
+      <!-- If picturePath contains a directory, the first photo is shown -->
+      {{ $photos := resources.Match (printf "photos/%s/*" $picturePath) }}
+      {{ $originalPhoto := index $photos 0 }}
+      {{ $thumbnail := $originalPhoto.Fit "500x500" }}
       <div class="picture-item">
         <a href="{{ .Permalink }}">
           <img src="{{ $thumbnail.RelPermalink }}" alt="{{ .Title }}" loading="lazy" />

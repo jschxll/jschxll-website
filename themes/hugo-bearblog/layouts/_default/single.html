@@ -20,12 +20,13 @@
 
 <section class="post-end">
   <p>You have written a <strong>response</strong>? Post it <a href="https://webmention.io/jschall.net/webmention">here</a>!</p>
-
+  {{ if strings.HasPrefix .Path "/posts/" }}
   {{ with .PrevInSection }}
     <a class="prev" href="{{ .Permalink }}">{{ .Title }}&raquo</a>
   {{ end }}
   {{ with .NextInSection }}
     <a class="next" href="{{ .Permalink }}">&laquo{{ .Title }}</a>
+  {{ end }}
   {{ end }}
 </section>
 

@@ -2,12 +2,9 @@
 
 {{ $lightboxScript := resources.Get "photoswipe/dist/photoswipe-lightbox.esm.js" }}
 {{ $pswpModule := resources.Get "photoswipe/dist/photoswipe.esm.js" }}
-{{ $lightboxStyle := resources.Get "photoswipe/dist/photoswipe.css" }}
-{{ $picturePath := .Params.photo }}
+{{ $lightboxStyle := resources.Get "photoswipe/dist/photoswipe.css" }} 
+{{ $picturePath := .Params.photo }} 
 {{ $picture := resources.GetMatch (printf "photos/%s" $picturePath) }}
-
-{{ $pictureWidth := $picture.Width }}
-{{ $pictureHeight := $picture.Height }}
 
 <head>
   <link rel="stylesheet" href="{{ $lightboxStyle.Permalink }}" />
@@ -15,22 +12,40 @@
 
 <article class="picture-container h-card">
   {{ if $picture }}
-  <div
-    class="pswp-gallery pswp-gallery--single-column"
-    id="gallery--getting-started"
-  >
-    <a
-      href="{{ $picture }}"
-      data-pswp-src="{{ $picture }}"
-      data-pswp-width="{{ $pictureWidth }}"
-      data-pswp-height="{{ $pictureHeight }}"
-      target="_blank"
-    >
-      <img src="{{ $picture.RelPermalink }}" alt="{{ .Title }}" />
-    </a>
-  </div>
+    {{ $pictureWidth := $picture.Width }}
+    {{ $pictureHeight := $picture.Height }}
+    <div class="pswp-gallery single-photo" id="gallery--getting-started">
+      <a
+        href="{{ $picture }}"
+        data-pswp-src="{{ $picture }}"
+        data-pswp-width="{{ $pictureWidth }}"
+        data-pswp-height="{{ $pictureHeight }}"
+        target="_blank"
+        class="photo-link"
+      >
+        <img src="{{ $picture.RelPermalink }}" alt="{{ .Title }}" class="photo" loading="lazy"/>
+      </a>
+    </div>
+  {{ else }}
+    {{ $pictures := resources.Match (printf "photos/%s/*" $picturePath) }}
+    <div class="pswp-gallery picture-grid" id="gallery--getting-started">
+      {{ range $photo := $pictures }}
+        {{ $pictureWidth := $photo.Width }}
+        {{ $pictureHeight := $photo.Height }}
+        <a
+          href="{{ $photo }}"
+          data-pswp-src="{{ $photo }}"
+          data-pswp-width="{{ $pictureWidth }}"
+          data-pswp-height="{{ $pictureHeight }}"
+          target="_blank"
+          class="photo-link"
+        >
+          <img src="{{ $photo.RelPermalink }}" alt="{{ .Title }}" class="photo" loading="lazy"/>
+        </a>
+      {{ end }}
+    </div>
   {{ end }}
-  
+
   <div class="location-container">
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -54,9 +69,12 @@
       </time>
     </div>
   </div>
-  
+
   <p>{{ .Content }}</p>
-  <p>You have written a <strong>response</strong>? Post it <a href="https://webmention.io/jschall.net/webmention">here</a>!</p>
+  <p>
+    You have written a <strong>response</strong>? Post it
+    <a href="https://webmention.io/jschall.net/webmention">here</a>!
+  </p>
 </article>
 
 <script type="module">
@@ -70,23 +88,59 @@
 </script>
 
 <style>
-  .picture-container {
-    margin-top: 10px;
-  }
+.picture-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-gap: 5px;
+  margin-top: 10px;
+  position: relative;
+}
 
-  .location-container {
-    display: flex;
-    align-items: center;
-  }
+.single-photo {
+  margin-top: 10px;
+}
 
-  .picture-date {
-    font-size: small;
-  }
+.location-container {
+  margin-top: 5px;
+  display: flex;
+  align-items: center;
+}
 
-  .picture-info {
-    display: flex;
-    flex-direction: column;
-  }
+.photo-link {
+  display: block;
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, z-index 0.3s ease;
+}
+
+.photo {
+  width: 100%;
+  height: auto;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 8px;
+}
+
+.photo-link:first-child {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+.photo:first-child {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.photo-link:nth-child(n+2) {
+  grid-column: span 1;
+  grid-row: span 1;
+}
+
+.photo:hover {
+  transform: scale(1.05);
+  z-index: 10;
+  box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.3);
+}
 </style>
 
 {{ end }}
