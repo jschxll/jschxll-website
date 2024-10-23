@@ -30,7 +30,7 @@ to update your mirror's repositories.
 
 ## Installing Docker and Photoprism
 
-You can easily install Docker with this commands taken from the [official docker installation guide](https://docs.docker.com/engine/install/ubuntu/):
+You can easily install Docker with those commands taken from the [official docker installation guide](https://docs.docker.com/engine/install/ubuntu/):
 ```bash
 # Add Docker's official GPG key:
 sudo apt-get update
