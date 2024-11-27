@@ -10,6 +10,3 @@ So, why did he create this page, you think? - Here a few reasons:
 -> I like the idea behind the [IndieWeb](https://indieweb.org/) {{<line-break>}}
 -> Learning web-dev technologies along this page {{<line-break>}}
 -> Improving my English writing skills (I'm from Germany, btw)
-
-{{<recent-posts>}}
-{{<notes>}}
