@@ -1,22 +1,39 @@
 {{ define "main" }}
+<head>
+  <style>
+    body {
+      font-family: Lora;
+    }
+    h1, .post-data {
+      font-family: FiraMono;
+    }
+
+    h2, h3, h4, h5, h6 {
+      font-style: italic;
+    }
+  </style>
+</head>
 {{ if eq .Type "posts" }}{{ if not .Params.menu }}
 <h1>{{ .Title }}</h1>
-<p>
-  <i>
-    <time datetime='{{ .Date.Format "2006-01-02" }}' pubdate>
-      {{ .Date.Format (default "02 Jan, 2006" .Site.Params.dateFormat) }}
-    </time>
-  </i>
-</p>
+<div class="post-data">
+  <div>
+      <time datetime='{{ .Date.Format "2006-01-02" }}' pubdate>
+        {{ .Date.Format (default "02 Jan, 2006" .Site.Params.dateFormat) }}
+      </time>
+  </div>
+  <div>
+    {{ range (.GetTerms "tags") }}
+      <a href="{{ .Permalink }}">#{{ .LinkTitle }}</a>
+    {{ end }}
+  </div>
+</div>
 {{ end }}{{ end }}
+<p>
+  
+</p>
 <content class="h-card">
   {{ .Content }}
 </content>
-<p>
-  {{ range (.GetTerms "tags") }}
-  <a href="{{ .Permalink }}">#{{ .LinkTitle }}</a>
-  {{ end }}
-</p>
 
 <section class="post-end">
   {{ if strings.HasPrefix .Path "/posts/" }}

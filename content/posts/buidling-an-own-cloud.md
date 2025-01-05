@@ -1,5 +1,5 @@
 +++
-title = "Run yourself a cloud at home"
+title = "Building an own cloud"
 date = "2024-04-28"
 description = "How I run Photoprism on my own homeserver to backup my photos without sharing my data with third parties"
 tags = ["linux", "homeserver", "photoprism", "docker"]

@@ -1,8 +1,8 @@
 +++
-title = "My first touch with Arch Linux"
+title = "My Arch Linux experience"
 date = "2024-07-23"
 description = 'So I had an old ThinkPad T510 lying around in my room and I wondered what I could do with it. The BIOS was last updated in 2012 and the preinstalled Windows 10 ran on a 2.5" HDD with a capacity of 160GB. As expected, the Windows experience was terrible, especially when considering the whole machine runs with 4GB of RAM. And now? Here is my experience with the installation of Arch Linux.'
-tags = ["linux", "arch install"]
+tags = ["linux", "arch"]
 +++
 
 So I had an old ThinkPad T510 lying around in my room and I wondered what I could do with it: The BIOS was last updated in 2012 and the preinstalled Windows 10 ran on a 2,5" HDD with a capacity of 160GB. As expected, the Windows experience was terrible, especially when considering the whole machine runs with 4GB of RAM. First, it was clear I had to replace the HDD with a decent 2,5" SATA SSD. The mounting process was very easy: all I had to do was unscrew an extra lid from the backplate of the laptop and I had directly access to the SATA slot. Next, I looked up whether the battery, which you can unplug when pressing a bottom on the back of the laptop, was in good condition and well, it should hold surprisingly long: The BIOS diagnostic program promised a minimum runtime of 3 hours. But I will tell you more later.

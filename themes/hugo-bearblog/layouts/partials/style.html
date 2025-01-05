@@ -1,23 +1,45 @@
 <style>
+  @font-face {
+    font-family: SpaceGrotesk;
+    src: url("../../fonts/SpaceGrotesk-Regular.ttf");
+  }
+
+  @font-face {
+    font-family: FiraMono;
+    src: url("../../fonts/FiraMono-Regular.ttf");
+  }
+
+  @font-face {
+    font-family: Lora;
+    src: url("../../fonts/Lora-Regular.ttf");
+  }
+
   body {
-    font-family: Verdana, sans-serif;
+    font-family: FiraMono;
     margin: auto;
     padding: 20px;
     max-width: 720px;
     text-align: left;
-    background-color: #333;
+    background-color: #1d1d1d;
     word-wrap: break-word;
     overflow-wrap: break-word;
     line-height: 1.5;
-    color: #ddd;
+    color: #e3dddd;
   }
 
-  h1, h2, h3, h4, h5, h6, strong, b {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  strong,
+  b {
     color: #eee;
   }
 
   a {
-    color: #8cc2dd;
+    color: #b39ddb;
   }
 
   .title {
@@ -29,8 +51,23 @@
     font-weight: 400;
   }
 
+  nav {
+    display: flex;
+    justify-content: space-between;
+    font-size: medium;
+    font-family: SpaceGrotesk;
+  }
+
+  nav:last-child {
+    color: #817373;
+  }
+
   nav a {
+    color: #d65d0e;
     margin-right: 10px;
+    text-decoration: underline 3px;
+    font-weight: bold;
+    font-size: 1.2em;
   }
 
   textarea {
@@ -120,10 +157,20 @@
   ul.blog-posts li a:visited {
     color: #8b6fcb;
   }
+  .post-data {
+    display: flex;
+    justify-content: space-between;
+  }
 
-  #webmentions ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  @media only screen and (max-width: 600px) {
+    .post-data {
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+    }
+
+    nav {
+      display: block;
+    }
   }
 </style>
