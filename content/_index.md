@@ -4,8 +4,7 @@ title = "Home"
 
 Hi, I'm a student from Germany. This site gives me space to write and share
 whatever I want to on the Internet, so do I.
-I spend my freetime mostly with {{<highlight>}}reading Sci-Fi books{{</highlight>}}, {{<highlight>}}coding{{</highlight>}} and
-{{<highlight>}}observing the night sky{{</highlight>}}.
+I spend my freetime mostly with {{<highlight>}}reading Sci-Fi books{{</highlight>}}, {{<highlight>}}coding{{</highlight>}} and {{<highlight>}}observing the night sky{{</highlight>}}.
 
 ### Fav books📖
 
