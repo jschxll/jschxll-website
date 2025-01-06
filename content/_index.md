@@ -9,7 +9,7 @@ I spend my freetime mostly with {{<highlight>}}reading Sci-Fi books{{</highlight
 ### Fav books📖
 
 - Otherland Series by Tad Williams
-- Trisolaris Trilogy by Cixin Lui
+- Trisolaris Trilogy by Cixin Liu
 - The Lord of The Rings by J.R.R. Tolkin
 
 ### Why I coded this page
