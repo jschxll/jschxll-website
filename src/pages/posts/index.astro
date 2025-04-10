@@ -1,0 +1,18 @@
+---
+import Main from "../../layouts/Main.astro"
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection("posts");
+posts.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+---
+
+<Main title="posts">
+    Some random things, I think are worth publishing:D Including ...
+    <ul>
+        {posts.map(post => 
+           <li>
+                <a href=`/posts/${post.slug}`>{post.data.title}</a>
+           </li>
+        )}
+    </ul>
+</Main>

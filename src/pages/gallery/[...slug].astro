@@ -1,0 +1,49 @@
+---
+import Main from "../../layouts/Main.astro";
+import { getCollection, render } from "astro:content";
+import { formattedDate } from "../../consts";
+
+import { Image } from "astro:assets";
+import locationIcon from "../../assets/icons/location_icon.svg";
+import Tags from "../../components/Tags.astro";
+
+export async function getStaticPaths() {
+  const gallery = await getCollection("gallery");
+  return gallery.map((image) => ({
+    params: { slug: image.slug },
+    props: { image },
+  }));
+}
+
+const { image } = Astro.props;
+const { Content } = await render(image);
+
+const imageNum = image.data.image.length;
+---
+
+<Main title={image.data.title}>
+  {
+    imageNum > 1 ? (
+      <div class="inspect-gallery-container">
+        {image.data.image.map((img) => (
+            <Image src={img} alt="" class="gallery-item" />
+        ))}
+      </div>
+    ) : (
+      image.data.image.map((img) => (
+        <Image src={img} alt="" class="gallery-item" />
+      ))
+    )
+  }
+  <div class="image-data">
+    <Tags tags={image.data.tags} />
+    <div>
+      <Image src={locationIcon} alt="" />
+      <span>{image.data.location}</span>
+    </div>
+    <span>{formattedDate(image.data.pubDate)}</span>
+  </div>
+  <p>
+    <Content />
+  </p>
+</Main>

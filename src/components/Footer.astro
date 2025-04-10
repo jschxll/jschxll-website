@@ -1,0 +1,28 @@
+---
+import { Image } from "astro:assets";
+import rssIcon from "../assets/icons/rss_icon.svg";
+import gitIcon from "../assets/icons/git.svg";
+import licenseIcon from "../assets/icons/license.svg";
+---
+
+<footer>
+  <div>
+    <a href="/terms-of-privacy">terms of privacy</a>
+  </div>
+  <div>
+    <a class="footer-link" href="https://xn--sr8hvo.ws/previous">←</a>
+    🕸💍
+    <a class="footer-link" href="https://xn--sr8hvo.ws/next">→</a>
+  </div>
+  <div class="f-links">
+    <a href="https://creativecommons.org/licenses/by-nc/4.0/?ref=chooser-v1"
+      ><Image src={licenseIcon} alt="" width="60" height="20" /></a
+    >
+    <a href="/feed.xml"
+      ><Image src={rssIcon} alt="rss" width="20" height="20" /></a
+    >
+    <a href="https://github.com/jschxll"
+      ><Image src={gitIcon} alt="git" width="20" height="20" /></a
+    >
+  </div>
+</footer>

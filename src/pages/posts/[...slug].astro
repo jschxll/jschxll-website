@@ -1,0 +1,31 @@
+---
+import Main from "../../layouts/Main.astro";
+import { getCollection, render } from "astro:content";
+import { formattedDate } from "../../consts";
+import Tags from "../../components/Tags.astro";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("posts");
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content, remarkPluginFrontmatter } = await render(post);
+---
+
+<Main title={post.data.title}>
+  <header>
+    <h2>{post.data.title}</h2>
+    <div class="post-header">
+      <div>{formattedDate(post.data.pubDate)}</div>
+      <div>{remarkPluginFrontmatter.minutesRead}</div>
+    </div>
+    <Tags tags={post.data.tags} />
+  </header>
+  <article>
+    <Content />
+  </article>
+</Main>

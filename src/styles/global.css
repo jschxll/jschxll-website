@@ -1,0 +1,127 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: RobotoSlab;
+  src: url("../assets/font/RobotoSlab-Regular.ttf");
+}
+
+body {
+  @apply font-[RobotoSlab] text-[#DDD] bg-[#222] max-w-[750px] ml-auto mr-auto;
+}
+
+nav {
+  @apply p-[4px] border-r-0 border-t-0 border-l-0 border-solid border-[#333] font-[sans-serif];
+}
+
+nav a {
+  @apply text-[#5da355] text-[16px];
+}
+
+main {
+  @apply mt-[40px];
+}
+
+li a {
+  @apply text-[#DDD];
+}
+
+.tags-container {
+  @apply flex;
+}
+
+.tag-links {
+  padding: 2px;
+  color: #828282;
+  text-decoration: none;
+}
+
+.tag-links:hover {
+  text-decoration: underline;
+}
+
+.tag-links::before {
+  content: "#";
+}
+
+footer {
+  @apply mt-[10px] border-r-0 border-b-0 border-l-0 border-solid border-[#333] flex justify-between;
+}
+
+footer a {
+  @apply text-[#DDD] text-[13px];
+}
+
+footer div {
+  @apply p-[3px];
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 2rem;
+}
+
+.profile-img {
+  border-radius: 50%;
+  border-style: solid;
+  border-color: #333;
+  height: auto;
+  width: 90px;
+  min-width: 40px;
+}
+
+.post-header {
+  @apply flex justify-between;
+}
+
+/* style for images in mdx post files */
+.post-img {
+  @apply w-[100%] h-auto max-w-[100%];
+}
+
+.astro-code {
+  @apply p-[4px] rounded-[5px];
+}
+
+@media (max-width: 768px) {
+  body {
+    margin-left: 4px;
+    margin-right: 4px;
+  }
+}
+
+/* Gallery styling */
+.inspect-gallery-container,
+.gallery-container {
+  @apply grid auto-rows-[1fr] mt-[20px];
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media (max-width: 500px) {
+  .inspect-gallery-container {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+.gallery-item {
+  @apply w-[100%] h-[100%] aspect-square object-cover block;
+}
+
+.image-counter {
+  position: absolute;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.75rem;
+  background-color: rgb(0, 0, 0, 0.6);
+  color: #ffffff;
+}
+
+.image-data {
+  @apply flex flex-col;
+}
+
+.image-data div {
+  @apply flex items-center;
+}

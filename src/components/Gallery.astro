@@ -1,0 +1,19 @@
+---
+import Image from "astro/components/Image.astro";
+import { getCollection } from "astro:content";
+
+const images = await getCollection("gallery");
+images.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+---
+
+<div class="gallery-container">
+    {images.map(image => 
+
+        <a href=`/gallery/${image.slug}`>
+            {image.data.image.length > 1 && (
+                <div class="image-counter">{image.data.image.length}</div>
+            )}
+            <Image src={image.data.image[0]} alt="" loading="lazy" class="gallery-item" />
+        </a>
+    )}
+</div>

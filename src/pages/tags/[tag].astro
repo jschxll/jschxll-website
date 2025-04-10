@@ -1,0 +1,42 @@
+---
+import { getCollection } from "astro:content";
+import Main from "../../layouts/Main.astro";
+
+const { tag } = Astro.params;
+
+export async function getStaticPaths() {
+  const posts = await getCollection("posts");
+  const gallery = await getCollection("gallery");
+  const allTags = [
+    ...posts.flatMap((post) => post.data.tags || []),
+    ...gallery.flatMap((image) => image.data.tags || []),
+  ];
+
+  const tags = [...new Set(allTags)];
+
+  return tags.map((tag) => ({
+    params: { tag },
+  }));
+}
+
+const posts = await getCollection("posts");
+const gallery = await getCollection("gallery");
+
+const allPosts = [
+  ...posts,
+  ...gallery
+]
+
+const contentWTag = allPosts.filter(post => (tag && post.data.tags?.includes(tag)));
+---
+
+<Main title={`#${tag}`} >
+  <h2>{`All posts with #${tag}`}</h2>
+  <ul>
+    {contentWTag.map(content => 
+      <li>
+        <a href=`/${content.collection}/${content.slug}`>{content.data.title}</a>
+      </li>
+    )}
+  </ul>
+</Main>
