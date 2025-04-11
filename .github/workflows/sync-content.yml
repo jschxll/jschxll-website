@@ -1,0 +1,30 @@
+name: Sync content to main branch
+
+on:
+  push:
+    branches:
+      - content
+
+jobs:
+  sync-content:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout main branch
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Pull content branch into src/content/posts
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git fetch origin content
+
+          # Checkout content branch files into target dir
+          git checkout origin/content -- src/content/posts/
+
+          git add src/content/posts/
+          git commit -m "Sync Obsidian content from content branch" || echo "No changes to commit"
+          git push
