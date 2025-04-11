@@ -4,7 +4,7 @@ on:
   push:
     branches: [ main ]
   workflow_run:
-    workflows: ["Sync Obsidian Content to Main"]
+    workflows: [Sync Obsidian Content to Main]
     types:
       - completed
   workflow_dispatch:
