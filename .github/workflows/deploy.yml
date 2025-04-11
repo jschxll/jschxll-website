@@ -3,11 +3,6 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [ main ]
-  workflow_run:
-    workflows: [Sync Obsidian Content to Main]
-    types:
-      - completed
-  workflow_dispatch:
 
 permissions:
   contents: read
