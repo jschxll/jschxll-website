@@ -1,0 +1,22 @@
+name: "Fetch content from submodule"
+on: [repository_dispatch, workflow_dispatch]
+jobs:
+  pull_content:
+  name: pull content
+  runs-on: ubuntu-latest
+  steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        submodules: true
+    - name: Pull submodule
+      run: |
+        git pull --recurse-submodules
+        git submodules update --init --recursive --remote
+    - name: Push changes:
+      run: |
+        git config --global user.email "jschxll@proton.me"
+        git config --global user.name "jschxll"
+        git add .
+        git commit -m "[Workflow] Updated website content"
+        git push
