@@ -13,7 +13,7 @@ jobs:
       run: |
         git pull --recurse-submodules
         git submodules update --init --recursive --remote
-    - name: Push changes:
+    - name: Push changes
       run: |
         git config --global user.email "jschxll@proton.me"
         git config --global user.name "jschxll"
