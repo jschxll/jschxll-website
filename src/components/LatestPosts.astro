@@ -1,0 +1,21 @@
+---
+import { getCollection } from "astro:content"
+import { formattedDate } from "../formattedDate";
+
+const notes = await getCollection("notes");
+notes.sort((a, b) => b.data.pubDate.getDate() - a.data.pubDate.getDate());
+---
+
+<ul class="latest-posts">
+    {notes.slice(0, 3).map(note => 
+        <li>
+            <a href={`/notes/${note.slug}`}>{note.data.title} ({formattedDate(note.data.pubDate)})</a>
+            {
+                note.data.description && (
+                    <br />
+                    <span>{note.data.description}</span>
+                )
+            }
+        </li>
+    )}
+</ul>

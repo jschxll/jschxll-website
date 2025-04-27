@@ -1,0 +1,16 @@
+---
+import { Image } from "astro:assets";
+import gitImg from "../assets/images/git.svg";
+import rssImg from "../assets/images/rss_icon.svg";
+---
+
+<section class="links">
+  <div class="meta-content link-icons">
+    <a href="https://github.com/jschxll" title="Git">
+      <Image src={gitImg} alt="" width={25} height={25} />
+    </a>
+    <a href="/feed.xml" title="RSS Feed">
+      <Image src={rssImg} alt="" width={25} height={25} />
+    </a>
+  </div>
+</section>

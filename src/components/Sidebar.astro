@@ -1,0 +1,47 @@
+---
+import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
+import profileImg from "../assets/images/profile.png";
+import { TreeNode } from "../TreeNode";
+
+const notes = await getCollection("notes");
+const root = new TreeNode("🌱digital garden");
+
+for (const note of notes) {
+  const parts = note.slug.split("/");
+  root.addChild(parts);
+}
+
+function renderTree(treeNode: TreeNode): string {
+  const children = treeNode.getChildren();
+  if (children.length === 0) {
+    const note = notes.filter((note) => note.slug.split("/")[note.slug.split("/").length-1] == treeNode.val)[0];
+    return `<li><a href="/notes/${note.slug}">${note.data.title}</a></li>`;
+  }
+  const inner = children.map((child) => renderTree(child)).join("");
+  return `
+        <li>
+            <details open>
+                <summary>${treeNode.val}</summary>
+                <ul>${inner}</ul>
+            </details>
+        </li>`;
+}
+
+const treeHtml = renderTree(root);
+---
+
+<button id="menuButton" class="lg:hidden text-2xl absolute top-2 left-2 z-20">&#9776;</button>
+
+<aside class="hide">
+  <Image src={profileImg} alt={""} class="profile-img" />
+  <nav>
+    <ul class="tree">
+        <li><a href="/">⬅️home</a></li>
+        <Fragment set:html={treeHtml} />
+        <li>
+          <a class="text-sm" href="/terms-of-privacy">terms of privacy</a>
+        </li>
+    </ul>
+  </nav>
+</aside>

@@ -1,0 +1,20 @@
+---
+import Links from "./Links.astro";
+import FileStructure from "./FileStructure.astro";
+import Tags from "./Tags.astro";
+
+const { headings, tags } = Astro.props;
+console.log(headings);
+---
+
+<section class="metabar">
+  <div id="container"></div>
+  <div class="graph-control">
+    <button id="zoom-in">+</button>
+    <button id="zoom-out">-</button>
+    <button id="reset-zoom">0</button>
+  </div>
+  {tags && <Tags tags={tags} />}
+  {headings && headings.length > 0 && <FileStructure headings={headings} />}
+  <Links />
+</section>

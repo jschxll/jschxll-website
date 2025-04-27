@@ -1,0 +1,47 @@
+---
+import Head from "../components/Head.astro";
+import Sidebar from "../components/Sidebar.astro";
+import "../styles/global.css";
+import Metabar from "../components/Metabar.astro";
+
+const { title, headings, tags } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <Head title={title} />
+  </head>
+  <body>
+    <Sidebar />
+    <main>
+      <slot />
+    </main>
+    <Metabar headings={headings} tags={tags} />
+  </body>
+
+  <script src="../graph.ts"></script>
+</html>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const button = document.getElementById("menuButton");
+    const sidePanel = document.querySelector("aside");
+
+    let visible = false;
+    if (button && sidePanel) {
+      button.addEventListener("click", () => {
+        if (!visible) {
+          document.body.classList.toggle("noscroll");
+          sidePanel.classList.add("slide-in");
+          sidePanel.classList.add("mobile-view");
+        } else {
+          document.body.classList.remove("noscroll");
+          sidePanel.classList.remove("slide-in");
+          sidePanel.classList.remove("mobile-view");
+        }
+        visible = !visible;
+      });
+    }
+  });
+</script>

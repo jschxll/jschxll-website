@@ -1,0 +1,14 @@
+---
+const { headings } = Astro.props;
+---
+
+<section class="headings">
+  <h1>🔗 On this page</h1>
+  <ul class="meta-content">
+    {headings.map((heading: { slug: string; text: unknown; depth: number; }) => (
+      <li style={`margin-left: ${heading.depth * 0.75}rem`}>
+        <a href={`#${heading.slug}`}>{heading.text}</a>
+      </li>
+    ))}
+  </ul>
+</section>
