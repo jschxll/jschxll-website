@@ -79,7 +79,7 @@ main {
 }
 
 .links {
-  @apply lg:fixed right-[5px] bottom-[20px];
+  @apply lg:fixed right-[5px] bottom-[20px] md:absolute;
 }
 
 .link-icons {
