@@ -8,6 +8,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
+          token: ${{ secrets.ACCESS_TOKEN }}
           submodules: true
       - name: Pull submodule
         run: |
@@ -17,7 +18,6 @@ jobs:
         run: |
           git config --global user.email "jschxll@proton.me"
           git config --global user.name "jschxll"
-          git remote set-url origin https://x-access-token:${{ secrets.ACCESS_TOKEN }}@github.com/jschxll/jschxll-website.git
           git add src/content
           git commit -m "[Workflow] Updated website content"
           git push
