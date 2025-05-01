@@ -7,11 +7,6 @@
   src: url("../assets/font/IBMPlexMono-Regular.ttf");
 }
 
-@font-face {
-  font-family: Domine;
-  src: url("../assets/font/Domine-Regular.ttf");
-}
-
 body {
   @apply h-[100vh] mt-[2rem];
 }
@@ -46,7 +41,6 @@ aside.mobile-view .profile-img {
 }
 
 main {
-  font-family: ;
   @apply prose max-w-none text-xl
     prose-h1:font-bold prose-h1:text-xl
     prose-a:text-blue-600 prose-p:text-justify prose-img:rounded-xl
