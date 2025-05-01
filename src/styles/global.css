@@ -46,7 +46,8 @@ aside.mobile-view .profile-img {
 }
 
 main {
-  @apply prose max-w-none text-xl font-[Domine]
+  font-family: ;
+  @apply prose max-w-none text-xl
     prose-h1:font-bold prose-h1:text-xl
     prose-a:text-blue-600 prose-p:text-justify prose-img:rounded-xl
     prose-headings:underline lg:ml-[300px] lg:mr-[300px] ml-2 mr-2 max-lg:mt-20;
