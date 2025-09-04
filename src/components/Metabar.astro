@@ -1,14 +1,12 @@
 ---
-import Links from "./Links.astro";
 import FileStructure from "./FileStructure.astro";
 import Tags from "./Tags.astro";
 
 const { headings, tags } = Astro.props;
-console.log(headings);
 ---
 
 <section class="metabar">
-  <div id="container"></div>
+  <div id="container" style="background-color: #252422; border: none"></div>
   <div class="graph-control">
     <button id="zoom-in">+</button>
     <button id="zoom-out">-</button>
@@ -16,5 +14,4 @@ console.log(headings);
   </div>
   {tags && <Tags tags={tags} />}
   {headings && headings.length > 0 && <FileStructure headings={headings} />}
-  <Links />
 </section>

@@ -2,11 +2,16 @@ import Graph from "graphology";
 import { circular } from "graphology-layout";
 import Sigma from "sigma";
 import { TreeNode } from "./TreeNode";
+import { colorForIntegration } from "astro/runtime/client/dev-toolbar/apps/utils/icons.js";
 
 const notes = Object.entries(
   import.meta.glob("./content/notes/**/*.md", { eager: true })
 ).map(([path, note]) => {
-  const slug = path.replace("./content/notes/", "").replace(".md", "").toLowerCase().replaceAll(" ", "-");
+  const slug = path
+    .replace("./content/notes/", "")
+    .replace(".md", "")
+    .toLowerCase()
+    .replaceAll(" ", "-");
   return {
     ...note,
     url: `/${slug}`,
@@ -15,19 +20,19 @@ const notes = Object.entries(
 });
 
 const noteMap = new Map(
-  notes.map((note) => [note.url.split("/").pop(), note.url])
+  notes.map((note) => [note.url.split("/").pop(), {"title": note.title, "url": note.url}])
 );
 
 function traverseTree(node: TreeNode, graph: Graph) {
   if (node == null) return;
 
   for (let child of node.getChildren()) {
-    const url = noteMap.get(child.val) ?? null;
+    const noteInformation = noteMap.get(child.val) ?? null;
     graph.addNode(child.val, {
-      label: child.val,
+      label: noteInformation?.title || child.val,
       size: child.getChildren().length * 5 || 5,
-      url: url != null ? `/notes${url}` : null,
-      color: child.getChildren().length != 0 ? "#8bb386" : "#ba794a", // different color, if child has children/is a directory
+      url: noteInformation?.url != null ? `/notes${noteInformation.url}` : null,
+      color: child.getChildren().length != 0 ? "#6b8f71" : "#a3c9a8", // different color, if child has children/is a directory
     });
 
     graph.addEdge(node.val, child.val, { size: 2 });
@@ -37,6 +42,7 @@ function traverseTree(node: TreeNode, graph: Graph) {
 
 function buildGraph() {
   const rootNode = new TreeNode("home");
+
   for (let note of notes) {
     const parts = note.url.split("/").slice(1);
     rootNode.addChild(parts);
@@ -67,8 +73,8 @@ function buildGraph() {
         graph.addNode(tag, {
           label: tag,
           size: 8,
-          color: "#ffd369",
-          url: `/tags/${tag}`
+          color: "#d4a373",
+          url: `/tags/${tag}`,
         });
       }
 
@@ -92,7 +98,21 @@ const resetZoomBttn = document.getElementById("reset-zoom") as HTMLElement;
 
 requestIdleCallback(() => {
   const graph = buildGraph();
-  const renderer = new Sigma(graph, container);
+  const renderer = new Sigma(graph, container, {
+    labelColor: {
+      attribute: "labelColor",
+      color: "#ffff",
+    }
+  });
+
+  renderer.on("enterNode", ({ node }) => {
+    graph.setNodeAttribute(node, "labelColor", "#000");
+  });
+
+  renderer.on("leaveNode", ({ node }) => {
+    graph.setNodeAttribute(node, "labelColor", "#fff");
+  });
+
   const camera = renderer.getCamera();
 
   /* set properties of action buttons */

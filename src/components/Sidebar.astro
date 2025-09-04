@@ -3,6 +3,7 @@ import { getCollection } from "astro:content";
 import { Image } from "astro:assets";
 import profileImg from "../assets/images/profile.png";
 import { TreeNode } from "../TreeNode";
+import Links from "./Links.astro";
 
 const notes = await getCollection("notes");
 const root = new TreeNode("🌱digital garden");
@@ -44,4 +45,5 @@ const treeHtml = renderTree(root);
         </li>
     </ul>
   </nav>
+  <Links />
 </aside>
