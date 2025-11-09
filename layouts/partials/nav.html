@@ -1,0 +1,17 @@
+<div>
+    <a href="{{ "" | relURL }}">home</a>
+    {{ range .Site.Menus.main }}
+        <a href="{{ .URL }}">{{ .Name }}</a>
+    {{ end }}
+    {{ with .Site.GetPage "/posts" }}
+        <a href="{{ "posts" | relURL }}">posts</a>
+    {{ end }}
+    {{ with .Site.GetPage "/photos" }}
+        <a href="{{ "photos" | relURL }}">photos</a>
+    {{ end }}
+    <a href="https://github.com/jschxll" rel="me">git</a>
+</div>
+
+<div>
+    <img class="hero" src="/favicon.svg" height="35" width="35" alt="">
+</div>

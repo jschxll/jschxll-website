@@ -2,29 +2,18 @@
 
 <div class="picture-grid">
   {{ $pages := where site.RegularPages "Type" "photos" }}
-  {{ $paginator := .Paginate ($pages.ByParam "date").Reverse 4 }}
-  {{ range $paginator.Pages }}
-    {{ $picturePath := .Params.photo }}
-    {{ $originalPicture := resources.GetMatch (printf "photos/%s" $picturePath) }}
+  {{ $paginator := .Paginate ($pages.ByDate.Reverse) 10 }}
 
-    {{ if $originalPicture }}
-      {{ $thumbnail := $originalPicture.Fit "500x500" }}
-      <div class="picture-item">
-        <a href="{{ .Permalink }}">
-          <img src="{{ $thumbnail.RelPermalink }}" alt="{{ .Title }}" loading="lazy" />
-        </a>
-      </div>
-    {{ else }}
-      <!-- If picturePath contains a directory, the first photo is shown -->
-      {{ $photos := resources.Match (printf "photos/%s/*" $picturePath) }}
-      {{ $originalPhoto := index $photos 0 }}
-      {{ $thumbnail := $originalPhoto.Fit "500x500" }}
-      <div class="picture-item">
-        <a href="{{ .Permalink }}">
-          <img src="{{ $thumbnail.RelPermalink }}" alt="{{ .Title }}" loading="lazy" />
-        </a>
-      </div>
-    {{ end }}
+  {{ range $paginator.Pages }}
+  {{ $img := .Resources.GetMatch "*.jpg" }}
+  {{ if $img }}
+  {{ $thumb := $img.Fit "500x500" }}
+  <div class="picture-item">
+    <a href="{{ .Permalink }}">
+      <img src="{{ $thumb.RelPermalink }}" alt="{{ .Title }}" loading="lazy" />
+    </a>
+  </div>
+  {{ end }}
   {{ end }}
 </div>
 
@@ -34,27 +23,28 @@
   .picture-grid {
     margin-top: 10px;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-auto-rows: 1fr;
+    grid-gap: 6px;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   }
 
   .picture-item {
     position: relative;
-    width: 100%;
     overflow: hidden;
-    background-color: #f0f0f0;
+    border-radius: 8px;
+    cursor: zoom-in;
   }
 
   .picture-item img {
     width: 100%;
-    height: 100%;
+    height: auto;
     object-fit: cover;
-    display: block;
+    transition: transform .35s ease, box-shadow .35s ease;
+    border-radius: 8px;
   }
 
-  .picture-item:hover {
-    filter: brightness(0.7);
-    transition: filter 0.3s;
+  .picture-item:hover img {
+    transform: scale(1.05);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
   }
 </style>
 

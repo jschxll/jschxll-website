@@ -1,154 +1,81 @@
-{{ define "main" }} {{ $lightboxScript := resources.Get
-"photoswipe/dist/photoswipe-lightbox.esm.js" }} {{ $pswpModule := resources.Get
-"photoswipe/dist/photoswipe.esm.js" }} {{ $lightboxStyle := resources.Get
-"photoswipe/dist/photoswipe.css" }} {{ $picturePath := .Params.photo }} {{
-$picture := resources.GetMatch (printf "photos/%s" $picturePath) }}
+{{ define "main" }}
 
-<head>
-  <link rel="stylesheet" href="{{ $lightboxStyle.Permalink }}" />
-</head>
+{{ $images := .Resources.ByType "image" }}
 
-<article class="picture-container h-card">
-  {{ if $picture }} {{ $pictureWidth := $picture.Width }} {{ $pictureHeight :=
-  $picture.Height }}
-  <div class="pswp-gallery single-photo" id="gallery--getting-started">
-    <a
-      href="{{ $picture }}"
-      data-pswp-src="{{ $picture }}"
-      data-pswp-width="{{ $pictureWidth }}"
-      data-pswp-height="{{ $pictureHeight }}"
-      target="_blank"
+<div class="photo-gallery pswp-gallery" id="photos">
+  {{ range $i, $image := $images }}
+    {{ $w := $image.Width }}
+    {{ $h := $image.Height }}
+    {{ $thumb := $image.Fit "800x800" }}
+    
+    <a 
+      href="{{ $image.RelPermalink }}"
+      data-pswp-src="{{ $image.RelPermalink }}"
+      data-pswp-width="{{ $w }}"
+      data-pswp-height="{{ $h }}"
       class="photo-link"
     >
       <img
-        src="{{ $picture.RelPermalink }}"
-        alt="{{ .Title }}"
-        class="photo"
+        src="{{ $thumb.RelPermalink }}"
+        alt="{{ $.Title }}"
         loading="lazy"
+        class="photo"
       />
     </a>
-  </div>
-  {{ else }} {{ $pictures := resources.Match (printf "photos/%s/*" $picturePath)
-  }}
-  <div class="pswp-gallery picture-grid" id="gallery--getting-started">
-    {{ range $photo := $pictures }} {{ $pictureWidth := $photo.Width }} {{
-    $pictureHeight := $photo.Height }}
-    <a
-      href="{{ $photo }}"
-      data-pswp-src="{{ $photo }}"
-      data-pswp-width="{{ $pictureWidth }}"
-      data-pswp-height="{{ $pictureHeight }}"
-      target="_blank"
-      class="photo-link"
-    >
-      <img
-        src="{{ $photo.RelPermalink }}"
-        alt="{{ .Title }}"
-        class="photo"
-        loading="lazy"
-      />
-    </a>
-    {{ end }}
-  </div>
   {{ end }}
+</div>
 
-  <div class="location-container">
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      height="24px"
-      viewBox="0 -960 960 960"
-      width="24px"
-      fill="#e8eaed"
-    >
-      <path
-        d="M480-480q33 0 56.5-23.5T560-560q0-33-23.5-56.5T480-640q-33 0-56.5 23.5T400-560q0 33 23.5 56.5T480-480Zm0 294q122-112 181-203.5T720-552q0-109-69.5-178.5T480-800q-101 0-170.5 69.5T240-552q0 71 59 162.5T480-186Zm0 106Q319-217 239.5-334.5T160-552q0-150 96.5-239T480-880q127 0 223.5 89T800-552q0 100-79.5 217.5T480-80Zm0-480Z"
-      />
-    </svg>
-    <div class="picture-info">
-      <span>{{ .Params.place }}</span>
-      <time
-        class="picture-date"
-        datetime='{{ .Date.Format "2006-01-02" }}'
-        pubdate
-      >
-        {{ .Date.Format (default "02 Jan, 2006" .Site.Params.dateFormat) }}
-      </time>
-    </div>
+<header class="photo-header">
+  <h2>{{ .Title }}</h2>
+  <div class="photo-data">
+    <time datetime="{{ .Date }}">{{ .Date.Format "02 Jan 2006" }}</time>
+    <div>📍{{ .Params.place }}</div>
   </div>
+</header>
 
-  <p>{{ .Content }}</p>
-</article>
+<div class="photo-content">
+  {{ .Content }}
+</div>
+
+{{/* PhotoSwipe Lightbox */}}
+{{ $lightboxScript := resources.Get "photoswipe/dist/photoswipe-lightbox.esm.js" | resources.Fingerprint }}
+{{ $pswpModule := resources.Get "photoswipe/dist/photoswipe.esm.js" | resources.Fingerprint }}
+{{ $lightboxStyle := resources.Get "photoswipe/dist/photoswipe.css" | resources.Fingerprint }}
+
+<link rel="stylesheet" href="{{ $lightboxStyle.RelPermalink }}">
 
 <script type="module">
-  import PhotoSwipeLightBox from "{{ $lightboxScript.Permalink }}";
+  import PhotoSwipeLightBox from '{{ $lightboxScript.RelPermalink }}';
   const lightbox = new PhotoSwipeLightBox({
-    gallery: "#gallery--getting-started",
-    children: "a",
-    pswpModule: () => import("{{ $pswpModule.Permalink }}"),
+    gallery: '#photos',
+    children: 'a',
+    pswpModule: () => import('{{ $pswpModule.RelPermalink }}')
   });
   lightbox.init();
 </script>
 
 <style>
-  .picture-grid {
+  .photo-gallery {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    grid-gap: 5px;
-    margin-top: 10px;
-    position: relative;
+    grid-auto-flow: column;
+    grid-gap: 6px;
+    margin-bottom: 20px;
   }
-
-  .single-photo {
-    margin-top: 10px;
-  }
-
-  .location-container {
-    margin-top: 5px;
-    display: flex;
-    align-items: center;
-  }
-
-  .picture-info {
-    font-size: smaller;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .photo-link {
-    display: block;
-    overflow: hidden;
-    position: relative;
-    transition: transform 0.3s ease, box-shadow 0.3s ease, z-index 0.3s ease;
-  }
-
   .photo {
     width: 100%;
     height: auto;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border-radius: 8px;
-  }
-
-  .photo-link:first-child {
-    grid-column: span 2;
-    grid-row: span 2;
-  }
-
-  .photo:first-child {
-    width: 100%;
-    height: 100%;
+    border-radius: 6px;
     object-fit: cover;
+    transition: transform .3s;
   }
-
-  .photo-link:nth-child(n + 2) {
-    grid-column: span 1;
-    grid-row: span 1;
+  .photo-data {
+    display: flex;
+    justify-content: start;
   }
-
   .photo:hover {
-    transform: scale(1.05);
-    z-index: 10;
-    box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.3);
+    transform: scale(1.03);
   }
+  .photo-header { margin-bottom: 10px; }
 </style>
 
 {{ end }}

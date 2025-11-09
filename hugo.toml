@@ -68,3 +68,6 @@ ignoreErrors = ["error-disable-taxonomy"]
   disableAliases = false
   pagerSize = 1
   path = 'page'
+
+[markup.goldmark.renderer]
+  unsafe = true # Allow HTML in md files
